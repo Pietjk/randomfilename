@@ -22,6 +22,7 @@ class Dialogue:
             time.sleep(1)
             print('\nAbove are your new filenames ^')
             print('                             |')
-            time.sleep(5)
-            print('\nGoodbye!')
+            time.sleep(2)
+        elif section == 'bye':
+            print('Goodbye!')
             time.sleep(1)

@@ -5,11 +5,16 @@ import textPrinter as tp
 
 running = True
 
-def program():
+def program(old_path = None):
     tp.Dialogue.get('opening')
 
     # Get users filepath
-    given_path = input('\nGive a filepath: ')
+    global given_path
+    if old_path == None:
+        given_path = input('\nGive a filepath: ')
+    else:
+        given_path = old_path
+        
     file_list = []
 
     # Check if user is trying to access root or windows os directories
@@ -50,14 +55,19 @@ def program():
 
     # Display closing dialogue
     tp.Dialogue.get('end', names)
+    
+    restart = input('\nDo you want to restart? (y/n) ')
+
+    if restart == 'n' or restart == 'no':
+        tp.Dialogue.get('bye')
+        global running
+        running = False
+
+    if restart == 'y' or restart == 'yes':
+        reset = input('\nDo you want to use the previous directory? (y/n) ')
+
+        if reset == 'y' or reset == 'yes':
+            program(given_path);
 
 while running == True:
     program()
-    restart = input('\nDo you want to restart? (y/n) ')
-
-    if restart == 'y' or restart == 'yes':
-        program();
-        restart = input('\nDo you want to restart? (y/n) ')
-    elif restart == 'n' or restart == 'no':
-        tp.Dialogue.get('bye')
-        running = False

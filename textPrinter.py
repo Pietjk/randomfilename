@@ -21,7 +21,6 @@ class Dialogue:
             print('\nDone! Thank you for using randomfilename-inator!')
             time.sleep(1)
             print('\nAbove are your new filenames ^')
-            print('                             |')
             time.sleep(2)
         elif section == 'bye':
             print('Goodbye!')

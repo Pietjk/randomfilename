@@ -4,6 +4,17 @@ import json
 import textPrinter as tp
 
 class Utils:
+    # Validate if the request is valid
+    def validateRequest(path):
+        # Check if filepath exists
+        assert os.path.exists(path), 'I could not find anything at '+str(path)
+
+        # Check if user is trying to access root or windows os directories
+        if(os.path.dirname(path) == path or os.environ['WINDIR'].upper() == path.upper()[:10]):
+            tp.Dialogue.get('rootException')
+            exit()
+    
+    # Get words from json
     def getWords():
         dirname = os.path.dirname(__file__)
         words_json = os.path.join(dirname, 'words.json')
@@ -11,6 +22,7 @@ class Utils:
         data = json.load(f) # 177957 words
         return data
 
+    # Get all files from directory
     def getFiles(path):
         file_list = []
 
@@ -20,6 +32,7 @@ class Utils:
 
         return file_list
 
+    # Generate names for the files in the directory
     def generateNames(path):
         file_list = Utils.getFiles(path)
         data = Utils.getWords()
@@ -43,12 +56,3 @@ class Utils:
             word = ''
 
         return names
-
-    def validateRequest(path):
-        # Check if filepath exists
-        assert os.path.exists(path), 'I could not find anything at '+str(path)
-
-        # Check if user is trying to access root or windows os directories
-        if(os.path.dirname(path) == path or os.environ['WINDIR'].upper() == path.upper()[:10]):
-            tp.Dialogue.get('rootException')
-            exit()

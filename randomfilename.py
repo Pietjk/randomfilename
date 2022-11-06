@@ -18,7 +18,7 @@ def program(old_path = None):
     file_list = []
 
     # Check if user is trying to access root or windows os directories
-    if(os.path.dirname(given_path) == given_path or os.environ['WINDIR'].upper() == given_path.upper()):
+    if(os.path.dirname(given_path) == given_path or os.environ['WINDIR'].upper() == given_path.upper()[:10]):
         tp.Dialogue.get('rootException')
         exit()
 
